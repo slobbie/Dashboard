@@ -1,9 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Color from '../constants/Colors';
 
 interface props {
   label: string;
   Size: string;
+  Color?: string;
+  fullWidth?: boolean | null;
+  onClick: () => void | null;
 }
 
 const Button = ({ ...props }: props) => {
@@ -35,8 +39,27 @@ const sizeStyles = css<props>`
       height: ${sizes[props.Size].height};
       font-size: ${sizes[props.Size].fontSize};
     `}
+  ${(props) =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+      justify-content: center;
+      & + & {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    `}
 `;
 
 const ButtonModel = styled.button<props>`
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 16px;
+  margin: 5px;
+
   ${sizeStyles}
+  &:hover {
+    background-color: ${Color.blue500};
+  }
 `;
