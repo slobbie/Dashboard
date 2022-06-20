@@ -11,8 +11,7 @@ interface props {
 }
 
 const Button = ({ ...props }: props) => {
-  const { label } = props;
-  return <ButtonModel {...props}>{label}</ButtonModel>;
+  return <ButtonModel {...props}>{props.label}</ButtonModel>;
 };
 
 export default Button;
@@ -49,10 +48,16 @@ const sizeStyles = css<props>`
         margin-top: 1rem;
       }
     `}
+    ${(props) =>
+    props.Color &&
+    css`
+      background-color: ${props.Color};
+    `}
 `;
 
 const ButtonModel = styled.button<props>`
   color: white;
+  background-color: ${Color.grey200};
   cursor: pointer;
   border: none;
   border-radius: 16px;
