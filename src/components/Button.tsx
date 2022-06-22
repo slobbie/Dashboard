@@ -6,12 +6,19 @@ interface props {
   label: string;
   Size: string;
   Color?: string;
-  fullWidth?: boolean | null;
-  onClick: () => void | null;
+  fullWidth?: boolean;
+  outLine?: boolean;
+  Valid?: string;
+  disabled?: boolean;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({ ...props }: props) => {
-  return <ButtonModel {...props}>{props.label}</ButtonModel>;
+  return (
+    <ButtonModel {...props} disabled={props.disabled ? false : true}>
+      {props.label}
+    </ButtonModel>
+  );
 };
 
 export default Button;
@@ -53,6 +60,16 @@ const sizeStyles = css<props>`
     css`
       background-color: ${props.Color};
     `}
+    ${(props) =>
+    props.outLine &&
+    css`
+      border: 1px solid ${Color.blue500};
+    `}
+    ${(props) =>
+    props.Valid &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 const ButtonModel = styled.button<props>`
@@ -62,6 +79,7 @@ const ButtonModel = styled.button<props>`
   border: none;
   border-radius: 16px;
   margin: 5px;
+  opacity: 0.7;
 
   ${sizeStyles}
   &:hover {

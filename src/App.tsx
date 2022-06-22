@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './components/Button';
 import Colors from './constants/Colors';
 
 function App() {
+  const navigate = useNavigate();
+  const Next = () => {
+    navigate('test');
+  };
+
+  const [valid, setValid] = useState(false);
+
   return (
     <div className='App'>
       <BtnBox>
         <Box>
-          <Button onClick={() => {}} Color='Pink' label='Button' Size='L' />
-          <Button onClick={() => {}} Color='Pink' label='Button' Size='M' />
-          <Button onClick={() => {}} Color='Pink' label='Button' Size='S' />
+          <Button Color='Pink' label='Button' Size='L' outLine />
+          <Button Color='Pink' label='Button' Size='M' />
+          <Button Color='Pink' label='Button' Size='S' />
         </Box>
         <Box>
-          <Button
-            onClick={() => {}}
-            Color={Colors.gray}
-            label='Button'
-            Size='L'
-          />
+          <Button Color={Colors.gray} label='Button' Size='L' />
           <Button
             onClick={() => {}}
             Color={Colors.gray}
@@ -30,10 +33,19 @@ function App() {
             Color={Colors.gray}
             label='Button'
             Size='S'
+            Valid='sss'
           />
         </Box>
         <Box>
-          <Button onClick={() => {}} label='Button' Size='L' fullWidth />
+          <Button
+            onClick={Next}
+            label='Button'
+            Size='L'
+            fullWidth
+            Valid='sss'
+            Color={Colors.blue500}
+            disabled={valid}
+          />
         </Box>
       </BtnBox>
     </div>
