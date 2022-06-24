@@ -10,13 +10,13 @@ function App() {
     navigate('test');
   };
 
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(true);
 
   return (
     <div className='App'>
       <BtnBox>
         <Box>
-          <Button Color='Pink' label='Button' Size='L' outLine />
+          <Button Color='blue' label='Button' Size='L' outLine />
           <Button Color='Pink' label='Button' Size='M' />
           <Button Color='Pink' label='Button' Size='S' />
         </Box>
@@ -29,11 +29,12 @@ function App() {
             Size='M'
           />
           <Button
-            onClick={() => {}}
+            onClick={Next}
             Color={Colors.gray}
             label='Button'
             Size='S'
             Valid='sss'
+            fullWidth
           />
         </Box>
         <Box>
@@ -42,8 +43,8 @@ function App() {
             label='Button'
             Size='L'
             fullWidth
-            Valid='sss'
-            Color={Colors.blue500}
+            // Valid='sss'
+            // Color={Colors.blue500}
             disabled={valid}
           />
         </Box>

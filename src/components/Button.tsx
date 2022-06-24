@@ -15,7 +15,7 @@ interface props {
 
 const Button = ({ ...props }: props) => {
   return (
-    <ButtonModel {...props} disabled={props.disabled ? false : true}>
+    <ButtonModel {...props} disabled={!props.Valid}>
       {props.label}
     </ButtonModel>
   );
