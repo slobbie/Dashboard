@@ -5,9 +5,13 @@ const grey100 = '#f2f4f6';
 const Colors = {
   white,
   black,
+  black100: ' #1C1C1C',
   gray: '#495057',
   grey100,
   grey200: '#e5e8eb',
+  grey300: '#efefef',
+  grey500: '#ABABAB',
+  grey600: '#727272',
   blue500: '#3182f6',
 };
 

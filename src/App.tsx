@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from './components/Button';
+import Input from './components/Input';
 import Colors from './constants/Colors';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
             disabled={valid}
           />
         </Box>
+        <Input />
       </BtnBox>
     </div>
   );
