@@ -49,7 +49,7 @@ function App() {
             disabled={valid}
           />
         </Box>
-        <Input />
+        <Input label='이름' placeholder='이름을 입력해주세요' width={300} />
       </BtnBox>
     </div>
   );

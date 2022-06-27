@@ -4,21 +4,22 @@ import Color from '../constants/Colors';
 
 interface Inputprops {
   label?: string;
-  // Size: string;
-  // Color?: string;
-  // fullWidth?: boolean;
-  // outLine?: boolean;
-  // Valid?: string;
-  // disabled?: boolean;
-  // onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  placeholder?: string;
+  width?: number;
+  height?: number;
 }
 
 const Input = ({ ...props }: Inputprops) => {
   return (
-    <Div>
+    <Div
+      style={{
+        width: props.width ? props.width : 'auto',
+        height: props.height ? props.height : '64px',
+      }}
+    >
       <InputBox>
-        <Lebel>dd</Lebel>
-        <InputItem placeholder='placeholder' />
+        <Lebel>{props.label}</Lebel>
+        <InputItem placeholder={props.placeholder} />
       </InputBox>
       <IconBox>
         <IconBtn>
@@ -33,7 +34,7 @@ export default Input;
 
 const Div = styled.div<Inputprops>`
   display: flex;
-  width: 380px;
+  /* width: 420px; */
   height: 64px;
   padding: 8px 12px;
   box-sizing: border-box;
@@ -58,6 +59,7 @@ const InputBox = styled.div`
 
 const Lebel = styled.label`
   color: ${Color.grey600};
+  font-size: 14px;
 `;
 
 const InputItem = styled.input`
@@ -65,7 +67,6 @@ const InputItem = styled.input`
   height: 100%;
   border: none;
   outline: none;
-  //styleName: Typo/SubTitle 2;
   font-family: Pretendard;
   font-size: 18px;
   font-weight: 500;
