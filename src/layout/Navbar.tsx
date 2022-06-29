@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import Colors from '../constants/Colors';
 import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 import { AiOutlineHome } from 'react-icons/ai';
+import { BiPhoneCall } from 'react-icons/bi';
 import { GiCamel } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -46,11 +48,16 @@ const Navbar = () => {
         >
           <span>Home</span>
         </Li>
+
         <Li
           className={activeIndex === 3 ? 'Hoverd' : ''}
           onClick={() => Hoverd(3)}
         >
-          <span>Home</span>
+          <span>
+            <Link to='/contact'>
+              <BiPhoneCall className='contactIcon' />
+            </Link>
+          </span>
         </Li>
       </Ul>
     </Container>
@@ -64,10 +71,10 @@ const Container = styled.nav`
     width: 60px;
   }
   border-radius: 20px;
-  position: fixed;
+  position: relative;
   width: 140px;
   height: 93%;
-  margin: 30px;
+  margin: 31px 20px;
   /* border-left: 10px solid ${Colors.NavColor}; */
   transition: 0.5s;
   overflow: hidden;
@@ -119,7 +126,8 @@ const Ul = styled.ul`
     display: flex;
     align-items: center;
   }
-  .HomeIcon {
+  .HomeIcon,
+  .contactIcon {
     box-sizing: border-box;
     width: 30px;
     height: 30px;
@@ -152,7 +160,8 @@ const Ul = styled.ul`
       box-shadow: 20px -20px 0 5px ${Colors.white};
       pointer-events: none;
     }
-    &.Hoverd .HomeIcon {
+    &.Hoverd .HomeIcon,
+    &.Hoverd .contactIcon {
       fill: ${Colors.NavColor};
     }
   }
@@ -173,6 +182,10 @@ const Li = styled.li`
     font-weight: 700;
     justify-content: center;
   }
+
+  /* .contactIcon {
+    fill: ${Colors.white};
+  } */
 
   &:hover,
   .Hoverd {
@@ -203,7 +216,8 @@ const Li = styled.li`
     box-shadow: 20px -20px 0 5px ${Colors.white};
     pointer-events: none;
   }
-  &:hover .HomeIcon {
+  &:hover .HomeIcon,
+  :hover .contactIcon {
     fill: ${Colors.NavColor};
   }
   &:nth-child(1) {

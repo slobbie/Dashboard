@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Color from '../constants/Colors';
+import Colors from '../../constants/Colors';
 
 interface props {
   label: string;
@@ -63,7 +63,7 @@ const sizeStyles = css<props>`
     ${(props) =>
     props.outLine &&
     css`
-      border: 1px solid ${Color.blue500};
+      border: 1px solid ${Colors.blue500};
     `}
     ${(props) =>
     props.Valid &&
@@ -74,7 +74,7 @@ const sizeStyles = css<props>`
 
 const ButtonModel = styled.button<props>`
   color: white;
-  background-color: ${Color.grey200};
+  background-color: ${Colors.grey200};
   cursor: pointer;
   border: none;
   border-radius: 16px;
@@ -83,6 +83,6 @@ const ButtonModel = styled.button<props>`
 
   ${sizeStyles}
   &:hover {
-    background-color: ${Color.blue500};
+    background-color: ${Colors.blue500};
   }
 `;

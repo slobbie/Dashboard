@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
-import Button from './components/Button';
-import Input from './components/Input';
 import Colors from './constants/Colors';
 import Navbar from './layout/Navbar';
+import Profill from './layout/profill';
+import Contact from './Page/ Contact';
 
 function App() {
   const navigate = useNavigate();
@@ -16,8 +16,14 @@ function App() {
 
   return (
     <Section>
-      <GlobalStyle />
-      <Navbar />
+      <Wrapper>
+        <GlobalStyle />
+        <Navbar />
+        <Routes>
+          <Route path='/contact' element={<Contact />} />
+        </Routes>
+        <Profill />
+      </Wrapper>
     </Section>
   );
 }
@@ -38,11 +44,25 @@ const GlobalStyle = createGlobalStyle`
   list-style: none;
   padding: 0;
  }
+ a{
+  text-decoration: none;
+  color: ${Colors.white};
+ }
 `;
 
 const Section = styled.section`
   width: 100%;
   height: 100vh;
   position: relative;
-  border: 1px solid black;
+  background: ${Colors.background};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  margin: 30px;
+  height: 93%;
+  border-radius: 30px;
+  box-shadow: 35px 35px 68px 0px rgba(206, 206, 245, 0.5),
+    inset -8px -8px 16px 0px rgba(206, 206, 245, 0.6),
+    inset 0px 11px 28px 0px rgb(255, 255, 255);
 `;

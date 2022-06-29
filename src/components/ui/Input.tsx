@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Color from '../constants/Colors';
+import Colors from '../../constants/Colors';
 
 interface Inputprops {
   label?: string;
@@ -38,14 +38,14 @@ const Div = styled.div<Inputprops>`
   height: 64px;
   padding: 8px 12px;
   box-sizing: border-box;
-  background: ${Color.white};
-  border: 1px solid ${Color.grey300};
+  background: ${Colors.white};
+  border: 1px solid ${Colors.grey300};
   border-radius: 5px;
   flex: none;
   order: 0;
   flex-grow: 0;
   &:focus-within {
-    border: 1px solid ${Color.grey600};
+    border: 1px solid ${Colors.grey600};
   }
 `;
 
@@ -58,7 +58,7 @@ const InputBox = styled.div`
 `;
 
 const Lebel = styled.label`
-  color: ${Color.grey600};
+  color: ${Colors.grey600};
   font-size: 14px;
 `;
 
@@ -73,7 +73,7 @@ const InputItem = styled.input`
   line-height: 30px;
   letter-spacing: -0.01em;
   padding-left: 0;
-  color: ${Color.black100};
+  color: ${Colors.black100};
 `;
 
 const IconBox = styled.div`
@@ -89,9 +89,9 @@ const IconBtn = styled.button`
   width: 24px;
 
   border-radius: 15px;
-  background-color: ${Color.grey500};
+  background-color: ${Colors.grey500};
   border: none;
-  color: ${Color.white};
+  color: ${Colors.white};
 `;
 
 const P = styled.p`
