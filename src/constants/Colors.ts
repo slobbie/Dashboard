@@ -5,6 +5,7 @@ const grey100 = '#f2f4f6';
 const Colors = {
   white,
   black,
+  NavColor: '#353955',
   black100: ' #1C1C1C',
   gray: '#495057',
   grey100,
