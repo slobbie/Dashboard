@@ -74,16 +74,13 @@ const Container = styled.nav`
   position: relative;
   width: 140px;
   height: 93%;
-  margin: 31px 20px;
+  margin: 30px;
   /* border-left: 10px solid ${Colors.NavColor}; */
   transition: 0.5s;
   overflow: hidden;
-  background: ${Colors.NavColor};
+  background: ${Colors.blue500};
   color: ${Colors.white};
-
-  box-shadow: 35px 35px 68px 0px rgba(91, 95, 120, 0.5),
-    inset -0px -0px 16px 0px rgba(255, 255, 255, 0.5),
-    inset 0px 11px 28px 0px rgb(91, 95, 120, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
   &.active {
     width: 80px;
   }

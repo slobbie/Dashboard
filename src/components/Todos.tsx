@@ -25,17 +25,25 @@ const TodoBox = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 30px auto;
-  box-shadow: 35px 35px 68px 0px rgba(206, 206, 245, 0.5),
-    inset -8px -8px 16px 0px rgba(206, 206, 245, 0.6),
-    inset 0px 11px 28px 0px rgb(255, 255, 255);
+  border-radius: 15px;
+  background: ${Colors.white};
+  box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
 `;
 
 const DeleteBtn = styled.button`
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
   border: none;
+  transition: 0.5s;
   cursor: pointer;
   .deleteIcon {
     width: 25px;
     height: 25px;
+    fill: #e97b86;
+    &:hover {
+      fill: red;
+    }
   }
   margin-right: 10px;
 `;

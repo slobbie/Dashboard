@@ -21,9 +21,6 @@ const TaskBox = styled.div`
   width: 100%;
   height: 60%;
   overflow: hidden;
-  box-shadow: 35px 35px 68px 0px rgba(206, 206, 245, 0.5),
-    inset -8px -8px 16px 0px rgba(206, 206, 245, 0.6),
-    inset 0px 11px 28px 0px rgb(255, 255, 255);
 `;
 
 const TextBox = styled.div`

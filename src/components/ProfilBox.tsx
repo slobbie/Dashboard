@@ -20,9 +20,9 @@ const ProfillBox = styled.div`
   width: 100%;
   height: 40%;
   margin-bottom: 20px;
-  box-shadow: 35px 35px 68px 0px rgba(206, 206, 245, 0.5),
-    inset -8px -8px 16px 0px rgba(206, 206, 245, 0.6),
-    inset 0px 11px 28px 0px rgb(255, 255, 255);
+  border-radius: 15px;
+  background: ${Colors.white};
+  box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
 `;
 
 const ProfillImgBox = styled.div`
@@ -44,6 +44,7 @@ const Img = styled.img`
 `;
 
 const Name = styled.span`
+  color: ${Colors.black200};
   margin-bottom: 5px;
   font-size: 24px;
   font-weight: bold;

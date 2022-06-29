@@ -34,8 +34,8 @@ const GlobalStyle = createGlobalStyle`
  body {
     margin: 0;
     min-height: 100vh;
-    background-color: #EAEEF4;
     overflow-x: hidden;
+    background: ${Colors.black};
  }
  ul,nav, section {
   margin: 0;
@@ -43,6 +43,9 @@ const GlobalStyle = createGlobalStyle`
  ul{
   list-style: none;
   padding: 0;
+ }
+ h2 {
+  margin: 0;
  }
  a{
   text-decoration: none;
@@ -54,15 +57,13 @@ const Section = styled.section`
   width: 100%;
   height: 100vh;
   position: relative;
-  background: ${Colors.background};
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 30px;
-  height: 93%;
-  border-radius: 30px;
-  box-shadow: 35px 35px 68px 0px rgba(206, 206, 245, 0.5),
-    inset -8px -8px 16px 0px rgba(206, 206, 245, 0.6),
-    inset 0px 11px 28px 0px rgb(255, 255, 255);
+  /* margin: 30px; */
+  width: 100%;
+  height: 100%;
+  /* border-radius: 30px; */
+  background: #dde4e9;
 `;

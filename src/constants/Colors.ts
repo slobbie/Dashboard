@@ -6,9 +6,11 @@ const background = '#eaeefa';
 const Colors = {
   white,
   black,
-  background,
-  NavColor: '#353955',
+  black200: '#333',
   black100: ' #1C1C1C',
+  background,
+  background2: '#f8f8f8',
+  NavColor: '#353955',
   gray: '#495057',
   grey100,
   grey200: '#e5e8eb',
