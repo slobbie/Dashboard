@@ -68,18 +68,20 @@ const ContactList = () => {
   return (
     <>
       <Wrapper>
-        {dummyData.map((v) => {
-          return (
-            <ListBox key={v.id}>
-              <ProfillImgBox>
-                <Img />
-                <Name>{v.name}</Name>
-                <Address>{v.address}</Address>
-                <Position>{v.postion}</Position>
-              </ProfillImgBox>
-            </ListBox>
-          );
-        })}
+        <Container>
+          {dummyData.map((v) => {
+            return (
+              <ListBox key={v.id}>
+                <ProfillImgBox>
+                  <Img />
+                  <Name>{v.name}</Name>
+                  <Address>{v.address}</Address>
+                  <Position>{v.postion}</Position>
+                </ProfillImgBox>
+              </ListBox>
+            );
+          })}
+        </Container>
       </Wrapper>
     </>
   );
@@ -88,18 +90,19 @@ const ContactList = () => {
 export default ContactList;
 
 const Wrapper = styled.div`
+  min-width: 590px;
   width: 100%;
   height: 92%;
   overflow: hidden;
   overflow-y: scroll;
-  /* display: flex; */
-  /* flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center; */
+  display: flex;
+  justify-content: center;
+`;
 
-  display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(4, 0fr);
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
 `;
 

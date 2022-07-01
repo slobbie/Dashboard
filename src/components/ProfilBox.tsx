@@ -17,7 +17,9 @@ const ProfilBox = () => {
 export default ProfilBox;
 
 const ProfillBox = styled.div`
+  transition: 0.5s;
   width: 100%;
+  min-width: 125px;
   height: 40%;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -26,6 +28,7 @@ const ProfillBox = styled.div`
 `;
 
 const ProfillImgBox = styled.div`
+  transition: 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +40,8 @@ const ProfillImgBox = styled.div`
 
 const Img = styled.img`
   border: 1px solid orange;
-  width: 150px;
+  max-width: 150px;
+  width: 100%;
   height: 150px;
   border-radius: 80px;
   margin-bottom: 20px;

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Colors from '../constants/Colors';
 import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineSchedule } from 'react-icons/ai';
 import { BiPhoneCall } from 'react-icons/bi';
-import { GiCamel } from 'react-icons/gi';
+import { GrSchedule } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
+import { MdOutlineDashboard } from 'react-icons/md';
 
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -13,40 +14,35 @@ const Navbar = () => {
 
   const Hoverd = (index: number) => {
     setActiveIndex(index);
-    console.log(activeIndex);
   };
-  console.log(toggle);
 
   return (
     <Container className={toggle ? 'active' : ''}>
+      <Logo>
+        <span>
+          <AiOutlineHome className='Logo' />
+        </span>
+      </Logo>
       <Ul>
-        <CloseBtn onClick={() => setToggle(!toggle)}>
-          {toggle ? (
-            <BsArrowBarRight className='closeBtn' />
-          ) : (
-            <BsArrowBarLeft className='closeBtn' />
-          )}
-        </CloseBtn>
-        <Logo>
-          <Li>
-            <span>
-              <GiCamel className='Logo' />
-            </span>
-          </Li>
-        </Logo>
         <Li
           className={activeIndex === 1 ? 'Hoverd' : ''}
           onClick={() => Hoverd(1)}
         >
           <span>
-            <AiOutlineHome className='HomeIcon' />
+            <Link to='/contact'>
+              <MdOutlineDashboard className='DashBoardIcon' />
+            </Link>
           </span>
         </Li>
         <Li
           className={activeIndex === 2 ? 'Hoverd' : ''}
           onClick={() => Hoverd(2)}
         >
-          <span>Home</span>
+          <span>
+            <Link to='/contact'>
+              <AiOutlineSchedule className='scheduleIcon' />
+            </Link>
+          </span>
         </Li>
 
         <Li
@@ -60,6 +56,13 @@ const Navbar = () => {
           </span>
         </Li>
       </Ul>
+      <CloseBtn onClick={() => setToggle(!toggle)}>
+        {toggle ? (
+          <BsArrowBarRight className='closeBtn' />
+        ) : (
+          <BsArrowBarLeft className='closeBtn' />
+        )}
+      </CloseBtn>
     </Container>
   );
 };
@@ -67,15 +70,12 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.nav`
-  .active {
-    width: 60px;
-  }
   border-radius: 20px;
   position: relative;
   width: 140px;
+  min-width: 60px;
   height: 93%;
   margin: 30px;
-  /* border-left: 10px solid ${Colors.NavColor}; */
   transition: 0.5s;
   overflow: hidden;
   background: ${Colors.blue500};
@@ -89,9 +89,15 @@ const Container = styled.nav`
 const Logo = styled.div`
   display: flex;
   margin-bottom: 54px;
+  justify-content: center;
+  margin: 40px 0;
+
   .Logo {
     width: 30px;
     height: 30px;
+    &:hover {
+      fill: red;
+    }
   }
 `;
 
@@ -114,7 +120,7 @@ const CloseBtn = styled.button`
 `;
 
 const Ul = styled.ul`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -123,8 +129,10 @@ const Ul = styled.ul`
     display: flex;
     align-items: center;
   }
-  .HomeIcon,
-  .contactIcon {
+
+  .DashBoardIcon,
+  .contactIcon,
+  .scheduleIcon {
     box-sizing: border-box;
     width: 30px;
     height: 30px;
@@ -157,8 +165,9 @@ const Ul = styled.ul`
       box-shadow: 20px -20px 0 5px ${Colors.white};
       pointer-events: none;
     }
-    &.Hoverd .HomeIcon,
-    &.Hoverd .contactIcon {
+    &.Hoverd .DashBoardIcon,
+    &.Hoverd .contactIcon,
+    &.Hoverd .scheduleIcon {
       fill: ${Colors.NavColor};
     }
   }
@@ -179,10 +188,6 @@ const Li = styled.li`
     font-weight: 700;
     justify-content: center;
   }
-
-  /* .contactIcon {
-    fill: ${Colors.white};
-  } */
 
   &:hover,
   .Hoverd {
@@ -213,12 +218,13 @@ const Li = styled.li`
     box-shadow: 20px -20px 0 5px ${Colors.white};
     pointer-events: none;
   }
-  &:hover .HomeIcon,
-  :hover .contactIcon {
+  &:hover .DashBoardIcon,
+  :hover .contactIcon,
+  :hover .scheduleIcon {
     fill: ${Colors.NavColor};
   }
-  &:nth-child(1) {
+  /* &:nth-child(1) {
     margin-bottom: 0;
     pointer-events: none;
-  }
+  } */
 `;

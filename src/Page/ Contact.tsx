@@ -20,6 +20,7 @@ export default Contact;
 
 const Section = styled.section`
   width: 100%;
+  min-width: 590px;
   height: 100%;
   overflow: hidden;
 `;
