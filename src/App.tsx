@@ -66,4 +66,7 @@ const Wrapper = styled.div`
   height: 100%;
   /* border-radius: 30px; */
   background: #dde4e9;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;

@@ -18,13 +18,16 @@ export default ProfilBox;
 
 const ProfillBox = styled.div`
   transition: 0.5s;
-  width: 100%;
+  width: 80%;
   min-width: 125px;
   height: 40%;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  /* margin-bottom: 20px; */
   border-radius: 15px;
   background: ${Colors.white};
   box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
+  @media screen and (max-width: 768px) {
+  }
 `;
 
 const ProfillImgBox = styled.div`

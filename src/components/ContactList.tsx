@@ -97,11 +97,13 @@ const Wrapper = styled.div`
   overflow-y: scroll;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    min-width: 0;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 `;
@@ -109,7 +111,7 @@ const Container = styled.div`
 const ListBox = styled.div`
   width: 250px;
   height: 250px;
-  margin: 20px 20px 20px 0;
+  margin: 20px;
   border-radius: 15px;
   background: ${Colors.white};
   box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);

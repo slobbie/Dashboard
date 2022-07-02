@@ -18,8 +18,8 @@ const Navbar = () => {
 
   return (
     <Container className={toggle ? 'active' : ''}>
-      <Logo>
-        <span>
+      <Logo className={activeIndex === 0 ? 'Hoverd' : ''}>
+        <span onClick={() => Hoverd(0)}>
           <AiOutlineHome className='Logo' />
         </span>
       </Logo>
@@ -56,13 +56,6 @@ const Navbar = () => {
           </span>
         </Li>
       </Ul>
-      <CloseBtn onClick={() => setToggle(!toggle)}>
-        {toggle ? (
-          <BsArrowBarRight className='closeBtn' />
-        ) : (
-          <BsArrowBarLeft className='closeBtn' />
-        )}
-      </CloseBtn>
     </Container>
   );
 };
@@ -72,7 +65,7 @@ export default Navbar;
 const Container = styled.nav`
   border-radius: 20px;
   position: relative;
-  width: 140px;
+  width: 80px;
   min-width: 60px;
   height: 93%;
   margin: 30px;
@@ -83,6 +76,18 @@ const Container = styled.nav`
   box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
   &.active {
     width: 80px;
+  }
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    bottom: 0;
+    width: 95%;
+    height: 50px;
+    margin: 0;
+    margin-bottom: 20px;
   }
 `;
 
@@ -96,26 +101,14 @@ const Logo = styled.div`
     width: 30px;
     height: 30px;
     &:hover {
-      fill: red;
+      fill: ${Colors.NavColor};
     }
   }
-`;
 
-const CloseBtn = styled.button`
-  position: relative;
-  display: block;
-  margin-left: auto;
-  border: none;
-  background: transparent;
-  transition: 0.6s;
-  .closeBtn {
-    width: 20px;
-    height: 18px;
-    fill: ${Colors.white};
-
-    &:hover {
-      fill: orange;
-    }
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    align-items: center;
+    margin-left: 40px;
   }
 `;
 
@@ -171,6 +164,25 @@ const Ul = styled.ul`
       fill: ${Colors.NavColor};
     }
   }
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .Hoverd {
+      &.Hoverd span::before {
+        content: '';
+        width: 0px;
+        height: 0px;
+      }
+      &.Hoverd span::after {
+        content: '';
+        width: 0px;
+        height: 0px;
+      }
+    }
+  }
 `;
 
 const Li = styled.li`
@@ -223,8 +235,30 @@ const Li = styled.li`
   :hover .scheduleIcon {
     fill: ${Colors.NavColor};
   }
-  /* &:nth-child(1) {
-    margin-bottom: 0;
-    pointer-events: none;
-  } */
+  @media screen and (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+    margin: 0;
+    border-radius: 30px;
+
+    &:hover span::before {
+      content: '';
+      width: 0px;
+      height: 0px;
+    }
+    &:hover span::after {
+      content: '';
+      width: 0px;
+      height: 0px;
+    }
+    &:hover .DashBoardIcon,
+    :hover .contactIcon,
+    :hover .scheduleIcon {
+      fill: ${Colors.NavColor};
+    }
+
+    &:nth-child(1) {
+      margin-left: 35px;
+    }
+  }
 `;
