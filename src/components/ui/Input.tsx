@@ -7,6 +7,10 @@ interface Inputprops {
   placeholder?: string;
   width?: number;
   height?: number;
+  icon?: boolean;
+  // value의 vail 검사 boolean을 props로 전달
+  textVaild?: boolean;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Input = ({ ...props }: Inputprops) => {
@@ -18,19 +22,29 @@ const Input = ({ ...props }: Inputprops) => {
       }}
     >
       <InputBox>
-        <Lebel>{props.label}</Lebel>
+        {props.label && <Lebel>{props.label}</Lebel>}
         <InputItem placeholder={props.placeholder} />
       </InputBox>
-      <IconBox>
-        <IconBtn>
-          <P>x</P>
-        </IconBtn>
-      </IconBox>
+      {props.icon && (
+        <IconBox>
+          <IconBtn {...props}>
+            <P>x</P>
+          </IconBtn>
+        </IconBox>
+      )}
     </Div>
   );
 };
 
 export default Input;
+
+const sizeStyles = css<Inputprops>`
+  ${(props) =>
+    props.textVaild &&
+    css`
+      border: 1px solid ${Colors.grey600};
+    `}
+`;
 
 const Div = styled.div<Inputprops>`
   display: flex;
@@ -44,6 +58,7 @@ const Div = styled.div<Inputprops>`
   flex: none;
   order: 0;
   flex-grow: 0;
+  ${sizeStyles}
   &:focus-within {
     border: 1px solid ${Colors.grey600};
   }
