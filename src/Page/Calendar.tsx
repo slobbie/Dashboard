@@ -62,13 +62,13 @@ const Calendar = () => {
 
               return (
                 <Box
-                  className={` ${isSelected} ${isGrayed}`}
+                  className={`${isGrayed}`}
                   key={i}
                   onClick={() => handleDayClick(current)}
                 >
-                  <Text onClick={modalClose} className='text'>
-                    {current.format('D')}
-                  </Text>
+                  <TextBox className={`${isSelected}`}>
+                    <Text onClick={modalClose}>{current.format('D')}</Text>
+                  </TextBox>
                 </Box>
               );
             })}
@@ -103,16 +103,19 @@ const Calendar = () => {
 export default Calendar;
 
 const Container = styled.section`
-  margin: 50px auto;
-  top: 40px;
-  max-width: 845px;
+  /* margin: 20px auto;
+  top: 40px; */
+  max-width: 1728px;
   width: 100%;
-  height: 600px;
-  position: relative;
+  max-height: 820px;
+  height: 100%;
   background-color: #fff;
   box-shadow: 3px 5px 13px rgb(163 177 198 / 43%),
     -8px -9px 5px rgb(255 255 255 / 19%);
   border-radius: 15px;
+  @media screen and (max-width: 768px) {
+    max-height: 100%;
+  }
 `;
 
 const Header = styled.div`
@@ -166,10 +169,12 @@ const WeekBox = styled.div`
 `;
 
 const Box = styled.div`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  padding: 20px 10px;
+  display: flex;
+  width: 55px;
+  height: 100px;
+  /* padding: 20px 10px; */
+  justify-content: center;
+  align-items: center;
   &.grayed {
     color: gray;
     opacity: 0.5;
@@ -179,6 +184,20 @@ const Box = styled.div`
     border-radius: 25px;
     color: white;
     background-color: red;
+  }
+`;
+
+const TextBox = styled.div`
+  width: 50px;
+  height: 50px;
+
+  &.selected {
+    border-radius: 25px;
+    color: white;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

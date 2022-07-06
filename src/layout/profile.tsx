@@ -62,7 +62,7 @@ const Section = styled.section`
   width: 0%;
   right: -100px;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   &.on {
     width: 22%;
     min-width: 260px;
@@ -105,12 +105,13 @@ const Wrapper = styled.div`
 `;
 
 const CloseBtn = styled.button`
-  position: relative;
-  display: block;
-  margin-left: auto;
+  position: absolute;
+  top: 10px;
+  right: 3px;
   border: none;
   background: transparent;
   transition: 0.6s;
+  z-index: 10;
   .closeBtn {
     width: 20px;
     height: 18px;

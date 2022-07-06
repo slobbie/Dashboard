@@ -19,19 +19,21 @@ const Contact = () => {
 export default Contact;
 
 const Section = styled.section`
+  max-width: 1728px;
   width: 100%;
-  min-width: 590px;
+  max-height: 820px;
   height: 100%;
   overflow: hidden;
   @media screen and (max-width: 768px) {
     min-width: 0;
+    max-height: 100%;
   }
 `;
 
 const Wrapper = styled.div`
-  margin: 30px;
-  padding: 40px;
-  height: 93%;
+  /* margin: 30px; */
+  /* padding: 40px; */
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   background: ${Colors.grey100};

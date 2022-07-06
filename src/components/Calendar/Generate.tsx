@@ -49,14 +49,13 @@ export default function Generate() {
               current.format('MM') !== today.format('MM') ? 'grayed' : '';
 
             return (
-              <Box
-                className={` ${isSelected} ${isGrayed}`}
+              <DayBox
+                className={`${isSelected} ${isGrayed}`}
                 key={i}
                 onClick={() => handleDayClick(current)}
               >
                 <Text className='text'>{current.format('D')}</Text>
-                {/* { modalOpen && <Modal modalClose={modalClose}></Modal>} */}
-              </Box>
+              </DayBox>
             );
           })}
       </WeekBox>
@@ -78,11 +77,14 @@ const WeekBox = styled.div`
   }
 `;
 
-const Box = styled.div`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  padding: 20px 10px;
+const DayBox = styled.div`
+  display: flex;
+  width: 55px;
+  height: 55px;
+  /* padding: 20px 10px; */
+  justify-content: center;
+  align-items: center;
+
   &.grayed {
     color: gray;
     opacity: 0.5;
