@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import Colors from '../constants/Colors';
-import Button from './ui/Button';
+import Colors from '../../constants/Colors';
 
 const Todos = () => {
   return (

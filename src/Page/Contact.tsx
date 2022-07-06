@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContactList from '../components/ContactList';
+import ContactList from '../components/Contact/ContactList';
 import Colors from '../constants/Colors';
 
 const Contact = () => {

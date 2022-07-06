@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import ProfilBox from '../components/ProfilBox';
-import TodoTask from '../components/TodoTask';
+import ProfilBox from '../components/Profile/ProfileBox';
+import TodoTask from '../components/Profile/TodoTask';
 import Colors from '../constants/Colors';
 import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 import MarginTop from '../components/ui/MarginTop';
 
-const Profill = () => {
+const Profile = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -18,7 +18,7 @@ const Profill = () => {
         )}
       </CloseBtn>
 
-      <Section className={toggle ? 'on' : ''}>
+      <Section className={toggle ? 'on' : 'hide'}>
         <Wrapper className={toggle ? 'on' : 'none'}>
           <MarginTop margin={30} />
           <ProfilBox />
@@ -30,7 +30,7 @@ const Profill = () => {
   );
 };
 
-export default Profill;
+export default Profile;
 
 const inSlide = keyframes`
   0% {
@@ -44,6 +44,19 @@ const inSlide = keyframes`
   }
 `;
 
+const outSlide = keyframes`
+  0% {
+    right: 0;
+   
+  }
+  50% {
+    right: -30px;
+  }
+  100% {
+    right: -100px;
+  }
+`;
+
 const Section = styled.section`
   transition: 0.5s;
   width: 0%;
@@ -51,13 +64,17 @@ const Section = styled.section`
   overflow: hidden;
   position: relative;
   &.on {
-    width: 30%;
+    width: 22%;
     min-width: 260px;
     height: 100%;
     background: ${Colors.background2};
     right: 0;
     animation: ${inSlide} 0.3s linear;
   }
+  &.hide {
+    animation: ${outSlide} 0.3s linear;
+  }
+
   @media screen and (max-width: 768px) {
     transition: 0.5s;
     position: absolute;

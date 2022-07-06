@@ -3,8 +3,9 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import Colors from './constants/Colors';
 import Navbar from './layout/Navbar';
-import Profill from './layout/profill';
-import Contact from './Page/ Contact';
+import Profill from './layout/profile';
+import Calendar from './Page/Calendar';
+import Contact from './Page/Contact';
 
 function App() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function App() {
         <GlobalStyle />
         <Navbar />
         <Routes>
+          <Route path='/calendar' element={<Calendar />} />
           <Route path='/contact' element={<Contact />} />
         </Routes>
         <Profill />

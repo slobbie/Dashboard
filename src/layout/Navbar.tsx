@@ -39,7 +39,7 @@ const Navbar = () => {
           onClick={() => Hoverd(2)}
         >
           <span>
-            <Link to='/contact'>
+            <Link to='/calendar'>
               <AiOutlineSchedule className='scheduleIcon' />
             </Link>
           </span>
