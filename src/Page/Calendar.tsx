@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import moment, { Moment as MomentTypes } from 'moment';
 import { useState } from 'react';
 import Modal from '../components/modal';
+import Button from '../components/ui/Button';
 
 const Calendar = () => {
   const [date, setdate] = useState<moment.Moment>(() => moment());
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const modalClose = () => {
+  const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
 
@@ -67,7 +68,9 @@ const Calendar = () => {
                   onClick={() => handleDayClick(current)}
                 >
                   <TextBox className={`${isSelected}`}>
-                    <Text onClick={modalClose}>{current.format('D')}</Text>
+                    <Text onDoubleClick={modalHandler}>
+                      {current.format('D')}
+                    </Text>
                   </TextBox>
                 </Box>
               );
@@ -87,6 +90,8 @@ const Calendar = () => {
           <button onClick={() => jumpToMonth(1)}> &gt;</button>
         </WeekHandeler>
       </Header>
+      {/* <button onClick={returnToday}>o</button> */}
+      <Button label='return' Size='M' />
       <Top>
         {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((el) => (
           <div key={el}>
@@ -95,7 +100,7 @@ const Calendar = () => {
         ))}
       </Top>
       <Body>{generate()}</Body>
-      {modalOpen && <Modal modalClose={modalClose}></Modal>}
+      {modalOpen && <Modal modalClose={modalHandler}></Modal>}
     </Container>
   );
 };
@@ -103,8 +108,7 @@ const Calendar = () => {
 export default Calendar;
 
 const Container = styled.section`
-  /* margin: 20px auto;
-  top: 40px; */
+  margin: 20px 20px 20px 0;
   max-width: 1728px;
   width: 100%;
   max-height: 820px;
@@ -115,6 +119,8 @@ const Container = styled.section`
   border-radius: 15px;
   @media screen and (max-width: 768px) {
     max-height: 100%;
+    margin: 0;
+    border-radius: 0;
   }
 `;
 
@@ -190,14 +196,13 @@ const Box = styled.div`
 const TextBox = styled.div`
   width: 50px;
   height: 50px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &.selected {
     border-radius: 25px;
     color: white;
     background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 `;
 

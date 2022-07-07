@@ -46,13 +46,14 @@ const GlobalStyle = createGlobalStyle`
   list-style: none;
   padding: 0;
  }
- h2 {
+ h2,input,p {
   margin: 0;
  }
  a{
   text-decoration: none;
   color: ${Colors.white};
  }
+
 `;
 
 const Section = styled.section`

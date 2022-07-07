@@ -1,13 +1,58 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Colors from '../constants/Colors';
+import { IoAddOutline } from 'react-icons/io5';
+import Button from './ui/Button';
+import { useAppDispatch } from '../store';
+import TodoSlice from '../slices/todo';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
 
-const Modal = ({ modalClose }: any) => {
+interface props {
+  modalClose: () => void;
+}
+
+const Modal = ({ modalClose }: props) => {
+  const dispatch = useAppDispatch();
+  const Todotext = useSelector((state: RootState) => state.todo.text);
+  const [active, setActive] = useState<boolean>(true);
+  const [text, setText] = useState<string>('');
+
   // 모달창 띄우는 코드
   const onCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       modalClose();
     }
   };
+
+  // Input 창을 띄우기 위한 Handler
+  const onFormInputHandler = useCallback(() => {
+    setActive((prev) => !prev);
+  }, []);
+
+  // Input onChange
+  const onChangeInput = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setText(e.target.value);
+    },
+    []
+  );
+
+  // 상태 업데이트
+  const onSubmit = useCallback(
+    (e: React.MouseEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(
+        TodoSlice.actions.setTodo({
+          id: Date.now(),
+          text: text,
+          done: false,
+        })
+      );
+      setText('');
+    },
+    [dispatch, text]
+  );
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -25,16 +70,26 @@ const Modal = ({ modalClose }: any) => {
   return (
     <>
       <ModalContainer onClick={onCloseModal}> </ModalContainer>
-      <form>
-        <ModalBox>
-          <CloesBtn className='cloes_btn' onClick={modalClose}>
-            X
-          </CloesBtn>
-          <TextTitle></TextTitle>
-          <TxetBox className='txet_box'></TxetBox>
-          <Modalbtn>완료</Modalbtn>
-        </ModalBox>
-      </form>
+      <Container>
+        <CloesBtn onClick={modalClose}>X</CloesBtn>
+        <TxetBox>
+          <CheckboxLabel htmlFor='yes'>
+            <CheckboxInput type='checkbox' id='yes' name='yes' />
+            <CheckboxP>{Todotext}</CheckboxP>
+          </CheckboxLabel>
+        </TxetBox>
+        <Form onSubmit={onSubmit}>
+          {active && (
+            <InputBox>
+              <TextArea value={text} onChange={onChangeInput} />
+              <Button type='submit' label='추가' Size='S' Valid='ture' />
+            </InputBox>
+          )}
+        </Form>
+        <Addbtn onClick={() => onFormInputHandler()}>
+          <IoAddOutline className='Addicon' />
+        </Addbtn>
+      </Container>
     </>
   );
 };
@@ -50,7 +105,7 @@ const ModalContainer = styled.div`
   left: 0;
 `;
 
-const ModalBox = styled.div`
+const Container = styled.div`
   width: 60%;
   height: 60vh;
   background-color: white;
@@ -61,6 +116,23 @@ const ModalBox = styled.div`
   z-index: 100;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgb(206 206 245 / 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: auto;
+  margin-top: 30px;
+  justify-content: space-between;
 `;
 
 const CloesBtn = styled.button`
@@ -70,38 +142,74 @@ const CloesBtn = styled.button`
   background-color: white;
   color: black;
   margin: 20px;
+  margin-right: auto;
 `;
 
-const InputTitle = styled.div`
-  width: 50%;
-`;
-
-const TextTitle = styled.div``;
-
-const Modalbtn = styled.button`
-  position: absolute;
+const Addbtn = styled.button`
+  position: relative;
   bottom: 0;
   margin-bottom: 10px;
   border-radius: 15px;
   border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.3;
+  &:hover {
+    opacity: 1;
+  }
+  .Addicon {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const TxetBox = styled.div`
-  position: relative;
-  top: 30%;
+  margin-right: auto;
+  margin-left: 50px;
 `;
 
-// const Textarea = styled.div`
-//   resize: none;
-//   width: 80%;
-//   height: 35vh;
-//   border-radius: 15px;
-//   padding: 20px;
-//   background-color: $color-note;
-//   font-size: 15px;
-//   line-height: 30px;
-//   border: none;
-//   text-align: center;
-//   box-shadow: 1px 2px 9px rgb(163 177 198);
-//   outline: none;
-// `;
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  user-select: none;
+`;
+
+const CheckboxInput = styled.input`
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1.5px solid gainsboro;
+  border-radius: 0.35rem;
+  &:checked {
+    border-color: transparent;
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: ${Colors.blue500};
+  }
+`;
+
+const CheckboxP = styled.p`
+  font-size: 16px;
+  margin-left: 10px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  margin-bottom: 15px;
+`;
+
+const TextArea = styled.textarea`
+  outline: none;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 10px;
+`;

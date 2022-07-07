@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Colors from '../constants/Colors';
-import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
 import { AiOutlineHome, AiOutlineSchedule } from 'react-icons/ai';
 import { BiPhoneCall } from 'react-icons/bi';
-import { GrSchedule } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import { MdOutlineDashboard } from 'react-icons/md';
 

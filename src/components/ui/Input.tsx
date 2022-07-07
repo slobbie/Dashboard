@@ -17,7 +17,7 @@ const Input = ({ ...props }: Inputprops) => {
   return (
     <Div
       style={{
-        width: props.width ? props.width : 'auto',
+        width: props.width ? props.width : '64px',
         height: props.height ? props.height : '64px',
       }}
     >
@@ -50,7 +50,7 @@ const Div = styled.div<Inputprops>`
   display: flex;
   /* width: 420px; */
   height: 64px;
-  padding: 8px 12px;
+  padding: 0px 12px;
   box-sizing: border-box;
   background: ${Colors.white};
   border: 1px solid ${Colors.grey300};
@@ -83,7 +83,7 @@ const InputItem = styled.input`
   border: none;
   outline: none;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 30px;
   letter-spacing: -0.01em;

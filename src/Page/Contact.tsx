@@ -19,6 +19,7 @@ const Contact = () => {
 export default Contact;
 
 const Section = styled.section`
+  margin: 20px 20px 20px 0;
   max-width: 1728px;
   width: 100%;
   max-height: 820px;
@@ -27,6 +28,7 @@ const Section = styled.section`
   @media screen and (max-width: 768px) {
     min-width: 0;
     max-height: 100%;
+    margin: 0;
   }
 `;
 
@@ -40,6 +42,7 @@ const Wrapper = styled.div`
   box-shadow: 0 4px 8px 0 rgba(206, 206, 245, 0.5);
   @media screen and (max-width: 768px) {
     margin: 0;
+    border-radius: 0;
   }
 `;
 

@@ -5,7 +5,10 @@ import Colors from '../../constants/Colors';
 interface props {
   label: string;
   Size: string;
+  type?: 'button' | 'submit';
   Color?: string;
+  width?: number;
+  height?: number;
   fullWidth?: boolean;
   outLine?: boolean;
   Valid?: string;
@@ -15,7 +18,14 @@ interface props {
 
 const Button = ({ ...props }: props) => {
   return (
-    <ButtonModel {...props} disabled={!props.Valid}>
+    <ButtonModel
+      style={{
+        width: props.width ? props.width : '64px',
+        // height: props.height ? props.height : '64px',
+      }}
+      {...props}
+      disabled={!props.Valid}
+    >
       {props.label}
     </ButtonModel>
   );
@@ -66,23 +76,27 @@ const sizeStyles = css<props>`
       border: 1px solid ${Colors.blue500};
     `}
     ${(props) =>
-    props.Valid &&
-    css`
-      opacity: 1;
-    `}
+    props.Valid
+      ? css`
+          opacity: 1;
+          &:hover {
+            background: ${Colors.blue500};
+            opacity: 0.8;
+          }
+        `
+      : css`
+          background: ${Colors.grey300};
+        `}
 `;
 
 const ButtonModel = styled.button<props>`
-  color: white;
-  background-color: ${Colors.grey200};
+  color: ${Colors.white};
+  background-color: ${Colors.blue500};
   cursor: pointer;
   border: none;
   border-radius: 16px;
   margin: 5px;
-  opacity: 0.7;
+  /* opacity: 0.7; */
 
   ${sizeStyles}
-  &:hover {
-    background-color: ${Colors.blue500};
-  }
 `;

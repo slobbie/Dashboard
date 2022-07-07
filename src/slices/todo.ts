@@ -11,16 +11,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // payload: dispatch로 입력된 데이터가 저장되어있다.
 
 const initialState = {
-  name: '',
-  email: '',
-  money: 0,
+  id: Date.now(),
+  text: '',
+  done: '',
 };
 const TodoSlice = createSlice({
   name: 'Todo',
   initialState,
   reducers: {
-    setName(state, action) {
-      state.name = action.payload;
+    setTodo(state, action) {
+      state.id = action.payload.id;
+      state.text = action.payload.text;
+      state.done = action.payload.done;
     },
   },
   extraReducers: (builder) => {},
