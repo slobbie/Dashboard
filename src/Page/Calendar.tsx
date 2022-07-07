@@ -3,12 +3,27 @@ import moment, { Moment as MomentTypes } from 'moment';
 import { useState } from 'react';
 import Modal from '../components/modal';
 import Button from '../components/ui/Button';
+import { useAppDispatch } from '../store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/reducer';
+import { selectTodoList, Todo } from '../slices/todo';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Colors from '../constants/Colors';
+import MarginTop from '../components/ui/MarginTop';
 
 const Calendar = () => {
   const [date, setdate] = useState<moment.Moment>(() => moment());
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const Navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const todoList = useSelector<RootState, Todo[]>((state) =>
+    selectTodoList(state.todo)
+  );
+
   const modalHandler = () => {
     setModalOpen(!modalOpen);
+    Navigate(`${date.format('D')}`);
   };
 
   const handleDayClick = (current: moment.Moment) => setdate(current);
@@ -62,17 +77,31 @@ const Calendar = () => {
                 current.format('MM') !== today.format('MM') ? 'grayed' : '';
 
               return (
-                <Box
-                  className={`${isGrayed}`}
-                  key={i}
-                  onClick={() => handleDayClick(current)}
-                >
-                  <TextBox className={`${isSelected}`}>
-                    <Text onDoubleClick={modalHandler}>
-                      {current.format('D')}
-                    </Text>
-                  </TextBox>
-                </Box>
+                <>
+                  <Box
+                    className={`${isGrayed}`}
+                    key={i}
+                    onClick={() => handleDayClick(current)}
+                  >
+                    <TextBox
+                      onDoubleClick={() => modalHandler()}
+                      className={`${isSelected}`}
+                    >
+                      <Text>{current.format('D')}</Text>
+                      <TodoWrapper>
+                        {todoList.map((list) => {
+                          return (
+                            <>
+                              <Todobox key={list.id}>
+                                <TextTodo>{list.text}</TextTodo>
+                              </Todobox>
+                            </>
+                          );
+                        })}
+                      </TodoWrapper>
+                    </TextBox>
+                  </Box>
+                </>
               );
             })}
         </WeekBox>
@@ -89,9 +118,10 @@ const Calendar = () => {
           <h3>{date.format('MMMM')}</h3>
           <button onClick={() => jumpToMonth(1)}> &gt;</button>
         </WeekHandeler>
+        <MarginTop margin={10} />
+        <Button label='return' Size='M' Valid='ture' onClick={returnToday} />
       </Header>
-      {/* <button onClick={returnToday}>o</button> */}
-      <Button label='return' Size='M' />
+
       <Top>
         {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((el) => (
           <div key={el}>
@@ -100,7 +130,7 @@ const Calendar = () => {
         ))}
       </Top>
       <Body>{generate()}</Body>
-      {modalOpen && <Modal modalClose={modalHandler}></Modal>}
+      {modalOpen && <Modal modalClose={() => modalHandler()} />}
     </Container>
   );
 };
@@ -153,12 +183,16 @@ const WeekHandeler = styled.div`
 
 const Top = styled.div`
   padding-top: 50px;
+  width: 95%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
 `;
 
 const Body = styled.div`
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  width: 95%;
+  margin: auto;
 `;
 
 const WeekBox = styled.div`
@@ -176,11 +210,15 @@ const WeekBox = styled.div`
 
 const Box = styled.div`
   display: flex;
-  width: 55px;
-  height: 100px;
+  width: 90%;
+  height: 95px;
   /* padding: 20px 10px; */
   justify-content: center;
   align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  a {
+    color: ${Colors.black};
+  }
   &.grayed {
     color: gray;
     opacity: 0.5;
@@ -194,19 +232,38 @@ const Box = styled.div`
 `;
 
 const TextBox = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
+  align-items: flex-start;
+  justify-content: flex-start;
   &.selected {
-    border-radius: 25px;
-    color: white;
-    background-color: red;
+    /* border-radius: 25px; */
+    color: ${Colors.blue500};
+    border: 1px solid ${Colors.blue500};
   }
 `;
 
 const Text = styled.span`
-  font-size: 15px;
+  font-size: 18px;
+  margin: 5px;
+  cursor: pointer;
+`;
+
+const TodoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const Todobox = styled.div`
+  margin: 5px;
+  background: ${Colors.grey300};
+`;
+const TextTodo = styled.span`
+  font-size: 13px;
+  margin: 5px;
   cursor: pointer;
 `;

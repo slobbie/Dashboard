@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createSelector,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 
 // store -> root reducer(state) -> user slice, order slice
 // state.user.emil
@@ -10,22 +15,58 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // reducer: 액션이 실제로 실행되면 state를 바꾸는 로직
 // payload: dispatch로 입력된 데이터가 저장되어있다.
 
-const initialState = {
-  id: Date.now(),
-  text: '',
-  done: '',
+export interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+export interface TodoList {
+  list: Todo[];
+}
+const actionPrefix = 'TODOS';
+
+const addTodos = createAction<object>(`${actionPrefix}/add`);
+const toggleTodos = createAction<object>(`${actionPrefix}/toggle`);
+
+const initialState: TodoList = {
+  list: [],
 };
-const TodoSlice = createSlice({
-  name: 'Todo',
-  initialState,
-  reducers: {
-    setTodo(state, action) {
-      state.id = action.payload.id;
-      state.text = action.payload.text;
-      state.done = action.payload.done;
-    },
+
+const reducers = {
+  add: (
+    { list }: TodoList,
+    { payload: { text, done } }: PayloadAction<Todo>
+  ) => {
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: text.toString(),
+      done,
+    };
+    list.push(newTodo);
   },
+  toggle: (
+    { list }: TodoList,
+    { payload: { id, done } }: PayloadAction<Todo>
+  ) => {
+    const targetIndex = list.findIndex((item: Todo) => item.id === id);
+    list[targetIndex].done = !done;
+  },
+};
+
+const TodoSlice = createSlice({
+  name: actionPrefix,
+  initialState,
+  reducers,
+
   extraReducers: (builder) => {},
 });
+
+export const selectTodoList = createSelector(
+  (state: TodoList) => state.list,
+  (list: Todo[]) => list
+);
+
+export const actions = { addTodos, toggleTodos };
 
 export default TodoSlice;

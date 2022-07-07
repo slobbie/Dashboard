@@ -4,9 +4,9 @@ import Colors from '../constants/Colors';
 import { IoAddOutline } from 'react-icons/io5';
 import Button from './ui/Button';
 import { useAppDispatch } from '../store';
-import TodoSlice from '../slices/todo';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/reducer';
+import TodoSlice, { actions } from '../slices/todo';
+import TodoItem from './Calendar/Todoitem';
+import { useMatch } from 'react-router-dom';
 
 interface props {
   modalClose: () => void;
@@ -14,10 +14,10 @@ interface props {
 
 const Modal = ({ modalClose }: props) => {
   const dispatch = useAppDispatch();
-  const Todotext = useSelector((state: RootState) => state.todo.text);
   const [active, setActive] = useState<boolean>(true);
   const [text, setText] = useState<string>('');
-
+  const Matchday = useMatch('/calendar/:D');
+  console.log(Matchday);
   // 모달창 띄우는 코드
   const onCloseModal = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -43,7 +43,7 @@ const Modal = ({ modalClose }: props) => {
     (e: React.MouseEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(
-        TodoSlice.actions.setTodo({
+        actions.addTodos({
           id: Date.now(),
           text: text,
           done: false,
@@ -54,6 +54,7 @@ const Modal = ({ modalClose }: props) => {
     [dispatch, text]
   );
 
+  // 모달을 제외한 스크린의 스크롤을 막기위한 이벤트
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
@@ -65,19 +66,14 @@ const Modal = ({ modalClose }: props) => {
       document.body.style.cssText = '';
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
-  }, []); // 모달을 제외한 스크린의 스크롤을 막기위한 이벤트
+  }, []);
 
   return (
     <>
       <ModalContainer onClick={onCloseModal}> </ModalContainer>
       <Container>
         <CloesBtn onClick={modalClose}>X</CloesBtn>
-        <TxetBox>
-          <CheckboxLabel htmlFor='yes'>
-            <CheckboxInput type='checkbox' id='yes' name='yes' />
-            <CheckboxP>{Todotext}</CheckboxP>
-          </CheckboxLabel>
-        </TxetBox>
+        <TodoItem />
         <Form onSubmit={onSubmit}>
           {active && (
             <InputBox>
@@ -108,7 +104,7 @@ const ModalContainer = styled.div`
 const Container = styled.div`
   width: 60%;
   height: 60vh;
-  background-color: white;
+  background-color: ${Colors.white};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -139,7 +135,7 @@ const CloesBtn = styled.button`
   position: relative;
   display: block;
   border: none;
-  background-color: white;
+  background-color: ${Colors.white};
   color: black;
   margin: 20px;
   margin-right: auto;
@@ -161,37 +157,6 @@ const Addbtn = styled.button`
     width: 50px;
     height: 50px;
   }
-`;
-
-const TxetBox = styled.div`
-  margin-right: auto;
-  margin-left: 50px;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  user-select: none;
-`;
-
-const CheckboxInput = styled.input`
-  appearance: none;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1.5px solid gainsboro;
-  border-radius: 0.35rem;
-  &:checked {
-    border-color: transparent;
-    background-size: 100% 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-color: ${Colors.blue500};
-  }
-`;
-
-const CheckboxP = styled.p`
-  font-size: 16px;
-  margin-left: 10px;
 `;
 
 const InputBox = styled.div`

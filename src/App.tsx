@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import Colors from './constants/Colors';
 import Navbar from './layout/Navbar';
@@ -8,20 +8,13 @@ import Calendar from './Page/Calendar';
 import Contact from './Page/Contact';
 
 function App() {
-  const navigate = useNavigate();
-  const Next = () => {
-    navigate('test');
-  };
-
-  const [valid, setValid] = useState(true);
-
   return (
     <Section>
       <Wrapper>
         <GlobalStyle />
         <Navbar />
         <Routes>
-          <Route path='/calendar' element={<Calendar />} />
+          <Route path='/calendar/*' element={<Calendar />} />
           <Route path='/contact' element={<Contact />} />
         </Routes>
         <Profill />
